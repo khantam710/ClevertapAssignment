@@ -19,6 +19,22 @@ const SigninForm = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [dob, setDob] = useState('');
+
+  // Validate Form
+  const validateForm = () => {
+    if (!name || !email || !phone || !dob) {
+      toast.error('Please fill in all fields!', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+      });
+      return false;
+    }
+    return true;
+  };
+  
   
   const formRef = useRef(null)
   const resetForm = () => {
@@ -30,30 +46,35 @@ const SigninForm = () => {
 
   
     // Login
-  const handleLogin = (e) => {
-    e.preventDefault();
-    CleverTap.onUserLogin.push({
-      Site: {
-        Name: name,
-        Email: email,
-        Phone: phone,
-        DOB: new Date(dob)
+    const handleLogin = (e) => {
+      e.preventDefault();
+      if (validateForm()) {
+        // Perform login action
+        CleverTap.onUserLogin.push({
+          Site: {
+            Name: name,
+            Email: email,
+            Phone: phone,
+            DOB: new Date(dob)
+          }
+        });
+    
+        toast.success('Login successful!', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+        });
+        resetForm();
       }
-    });
-
-    toast.success('Login successful!', {
-        position: "top-center", // Set the position of the toast notification
-        autoClose: 2000, // Auto close the toast after 2 seconds (2000 milliseconds)
-        hideProgressBar: true, // Hide the progress bar of the toast
-        closeOnClick: true, // Close the toast when clicked
-        pauseOnHover: false, // Pause the toast duration when hovered
-      });
-      resetForm();
-  };
+    };
 
     // Profile Push
     const handleProfilePush = (e) => {
-        e.preventDefault();
+      e.preventDefault();
+      if (validateForm()) {
+        // Perform profile push action
         CleverTap.profile.push({
           Site: {
             Name: name,
@@ -62,51 +83,58 @@ const SigninForm = () => {
             DOB: new Date(dob)
           }
         });
+    
         toast.success('Profile Push successful!', {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: false,
-          });
-          resetForm();
-      };
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+        });
+        resetForm();
+      }
+    };
 
-    //   Notifications Push
-    const handleAskForPush = (e) => {
-        e.preventDefault();
+    // Notifications Push
+const handleAskForPush = (e) => {
+  e.preventDefault();
+  if (validateForm()) {
+    // Perform ask for push action
     console.log("ask for push");
-        
-        // Send push notification to the user
-        CleverTap.notifications.push({
-          titleText: 'Would you like to receive Push Notifications?',
-          bodyText: 'We promise to only send you relevant content and give you updates on your transactions',
-          okButtonText: 'Sign me up!',
-          rejectButtonText: 'No thanks',
-          askAgainTimeInSeconds: 5,
-          okButtonColor: '#f28046'
-        });
-        // CleverTap.notificationCallback = notificationCallback;
-      };
+    // Send push notification to the user
+    CleverTap.notifications.push({
+      titleText: 'Would you like to receive Push Notifications?',
+      bodyText: 'We promise to only send you relevant content and give you updates on your transactions',
+      okButtonText: 'Sign me up!',
+      rejectButtonText: 'No thanks',
+      askAgainTimeInSeconds: 5,
+      okButtonColor: '#f28046'
+    });
+  }
+};
 
-    //   Handle Raise Event of Users
-      const handleRaiseEvent = (e) => {
-        e.preventDefault();
-        CleverTap.event.push('Details of Person', {
-          Name: name,
-          Email: email,
-          Phone: phone,
-          DOB: new Date(),
-        });
-        toast.success('Event Raised!', {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: false,
-          });
-          resetForm();
-      };
+// Handle Raise Event of Users
+const handleRaiseEvent = (e) => {
+  e.preventDefault();
+  if (validateForm()) {
+    // Perform raise event action
+    CleverTap.event.push('Details of Person', {
+      Name: name,
+      Email: email,
+      Phone: phone,
+      DOB: new Date(),
+    });
+
+    toast.success('Event Raised!', {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+    });
+    resetForm();
+  }
+};
     
 
   return (
