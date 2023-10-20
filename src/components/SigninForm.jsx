@@ -14,7 +14,7 @@ import {
 }
 from 'mdb-react-ui-kit';
 
-const Form = () => {
+const SigninForm = () => {
     const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -139,4 +139,4 @@ const Form = () => {
   );
 }
 
-export default Form;
+export default SigninForm;

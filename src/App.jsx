@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
-import Form from './components/form';
 import CleverTap from 'clevertap-web-sdk';
+import SigninForm from './components/SigninForm';
 
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
   
   return (
     <>
-      <Form/>
+      <SigninForm/>
     </>
   )
 }
