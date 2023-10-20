@@ -3,7 +3,6 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
-import SignupForm from './components/SignUpForm';
 import Form from './components/form';
 import CleverTap from 'clevertap-web-sdk';
 
@@ -14,7 +13,6 @@ function App() {
   
   return (
     <>
-      {/* <SignupForm/> */}
       <Form/>
     </>
   )
