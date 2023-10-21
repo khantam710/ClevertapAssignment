@@ -45,6 +45,8 @@ const SigninForm = () => {
   };
 
   
+
+  
     // Login
     const handleLogin = (e) => {
       e.preventDefault();
@@ -96,22 +98,31 @@ const SigninForm = () => {
     };
 
     // Notifications Push
-const handleAskForPush = (e) => {
-  e.preventDefault();
-  if (validateForm()) {
-    // Perform ask for push action
-    console.log("ask for push");
-    // Send push notification to the user
-    CleverTap.notifications.push({
-      titleText: 'Would you like to receive Push Notifications?',
-      bodyText: 'We promise to only send you relevant content and give you updates on your transactions',
-      okButtonText: 'Sign me up!',
-      rejectButtonText: 'No thanks',
-      askAgainTimeInSeconds: 5,
-      okButtonColor: '#f28046'
-    });
-  }
-};
+    const handleAskForPush = (e) => {
+      e.preventDefault();
+      if (validateForm()) {
+        // Perform ask for push action
+        console.log("ask for push");
+        // Send push notification to the user
+        CleverTap.notifications.push({
+          titleText: 'Would you like to receive Push Notifications?',
+          bodyText: 'We promise to only send you relevant content and give you updates on your transactions',
+          okButtonText: 'Sign me up!',
+          rejectButtonText: 'No thanks',
+          askAgainTimeInSeconds: 5,
+          okButtonColor: '#f28046'
+        });
+  
+        toast.success('Notification Sent!', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+        });
+        resetForm();
+      }
+    };
 
 // Handle Raise Event of Users
 const handleRaiseEvent = (e) => {
@@ -153,7 +164,7 @@ const handleRaiseEvent = (e) => {
           <MDBInput wrapperClass='mb-4' label='Date of Birth' size='lg' value={dob} onChange={(e) => setDob(e.target.value)} type='date'/>
           <MDBInput wrapperClass='mb-4' label='Contact Number' size='lg' value={phone} onChange={(e) => setPhone(e.target.value)} type=''/>
 
-          <div className='d-flex align-items-center justify-content-center'>
+          <div className='d-flex-lg d-flex-sm d-flex-md  align-items-center justify-content-center'>
           <MDBBtn className="ms-2 custom-btn" color="warning" size="lg" noRipple onClick={handleLogin}>Login</MDBBtn>
           <MDBBtn className="ms-2 custom-btn" color="warning" size="lg" noRipple onClick={handleProfilePush}>Profile Push </MDBBtn>
           <MDBBtn className="ms-2 custom-btn" color="warning" size="lg" noRipple onClick={handleAskForPush}>Ask For Push</MDBBtn>
