@@ -23,16 +23,26 @@ const SigninForm = () => {
   const [dob, setDob] = useState('');
 
   useEffect(() => {
-    requestForToken()
+    // Request notification permission here
+    Notification.requestPermission().then((permission) => {
+      if (permission === 'granted') {
+        // Permission granted, initialize Firebase messaging and get token
+        requestForToken();
+      } else {
+        // Permission denied
+        console.log('Notification permission denied.');
+      }
+    });
     onMessageListener()
       .then((payload) => {
-        console.log('Notification Received (Background/Forground):', payload);
+        console.log('Notification Received (Background/Foreground):', payload);
         // Handle the notification payload as needed
       })
       .catch((error) => {
         console.error('Error receiving push notification:', error);
       });
   }, []);
+  
 
 
   
