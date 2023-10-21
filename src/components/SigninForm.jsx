@@ -23,26 +23,16 @@ const SigninForm = () => {
   const [dob, setDob] = useState('');
 
   useEffect(() => {
-    // Request notification permission here
-    Notification.requestPermission().then((permission) => {
-      if (permission === 'granted') {
-        // Permission granted, initialize Firebase messaging and get token
-        requestForToken();
-      } else {
-        // Permission denied
-        console.log('Notification permission denied.');
-      }
-    });
+    requestForToken()
     onMessageListener()
       .then((payload) => {
-        console.log('Notification Received (Background/Foreground):', payload);
+        console.log('Notification Received (Background/Forground):', payload);
         // Handle the notification payload as needed
       })
       .catch((error) => {
         console.error('Error receiving push notification:', error);
       });
   }, []);
-  
 
 
   
@@ -122,43 +112,102 @@ const SigninForm = () => {
     };
 
     // Notifications Push
+    // const handleAskForPush = async (e) => {
+    //   e.preventDefault();
+    //   if (validateForm()) {
+    //     try {
+    //       // Get FCM token of the user
+    //       const currentToken = await getToken(messaging);
+  
+    //       // Send the notification using FCM token
+    //       // Your notification sending logic here
+    //       CleverTap.notifications.push({
+    //         titleText: 'Would you like to receive Push Notifications?',
+    //         bodyText: 'We promise to only send you relevant content and give you updates on your transactions',
+    //         okButtonText: 'Sign me up!',
+    //         rejectButtonText: 'No thanks',
+    //         askAgainTimeInSeconds: 5,
+    //         okButtonColor: '#f28046'
+    //       });
+  
+    //       // Handle the success of sending the notification
+    //       console.log('Notification Sent (Foreground):', {
+    //         titleText: 'Would you like to receive Push Notifications?',
+    //         bodyText: 'We promise to only send you relevant content and give you updates on your transactions',
+    //         okButtonText: 'Sign me up!',
+    //         rejectButtonText: 'No thanks',
+    //         askAgainTimeInSeconds: 5,
+    //         okButtonColor: '#f28046'
+    //       });
+  
+    //       // Handle the success of sending the notification
+    //       toast.success('Notification Sent!', {
+    //         position: 'top-center',
+    //         autoClose: 2000,
+    //         hideProgressBar: true,
+    //         closeOnClick: true,
+    //         pauseOnHover: false,
+    //       });
+  
+    //       resetForm();
+    //     } catch (error) {
+    //       // Handle errors during notification sending
+    //       console.error('Error Sending Notification:', error);
+    //       toast.error('Error Sending Notification', {
+    //         position: 'top-center',
+    //         autoClose: 2000,
+    //         hideProgressBar: true,
+    //         closeOnClick: true,
+    //         pauseOnHover: false,
+    //       });
+    //     }
+    //   }
+    // };
+
     const handleAskForPush = async (e) => {
       e.preventDefault();
       if (validateForm()) {
         try {
-          // Get FCM token of the user
-          const currentToken = await getToken(messaging);
-  
-          // Send the notification using FCM token
-          // Your notification sending logic here
-          CleverTap.notifications.push({
-            titleText: 'Would you like to receive Push Notifications?',
-            bodyText: 'We promise to only send you relevant content and give you updates on your transactions',
-            okButtonText: 'Sign me up!',
-            rejectButtonText: 'No thanks',
-            askAgainTimeInSeconds: 5,
-            okButtonColor: '#f28046'
-          });
-  
-          // Handle the success of sending the notification
-          console.log('Notification Sent (Foreground):', {
-            titleText: 'Would you like to receive Push Notifications?',
-            bodyText: 'We promise to only send you relevant content and give you updates on your transactions',
-            okButtonText: 'Sign me up!',
-            rejectButtonText: 'No thanks',
-            askAgainTimeInSeconds: 5,
-            okButtonColor: '#f28046'
-          });
-  
-          // Handle the success of sending the notification
-          toast.success('Notification Sent!', {
-            position: 'top-center',
-            autoClose: 2000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: false,
-          });
-  
+          // Request notification permission
+          const permission = await Notification.requestPermission();
+          if (permission === 'granted') {
+            // Permission granted, get FCM token and send the notification
+            const currentToken = await getToken(messaging);
+    
+            // Send the notification using FCM token
+            // Your notification sending logic here
+            CleverTap.notifications.push({
+              titleText: 'Would you like to receive Push Notifications?',
+              bodyText: 'We promise to only send you relevant content and give you updates on your transactions',
+              okButtonText: 'Sign me up!',
+              rejectButtonText: 'No thanks',
+              askAgainTimeInSeconds: 5,
+              okButtonColor: '#f28046'
+            });
+    
+            // Handle the success of sending the notification
+            console.log('Notification Sent (Foreground):', {
+              titleText: 'Would you like to receive Push Notifications?',
+              bodyText: 'We promise to only send you relevant content and give you updates on your transactions',
+              okButtonText: 'Sign me up!',
+              rejectButtonText: 'No thanks',
+              askAgainTimeInSeconds: 5,
+              okButtonColor: '#f28046'
+            });
+    
+            // Show success message to the user
+            toast.success('Notification Sent!', {
+              position: 'top-center',
+              autoClose: 2000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: false,
+            });
+          } else {
+            // Permission denied
+            console.log('Notification permission denied.');
+          }
+    
           resetForm();
         } catch (error) {
           // Handle errors during notification sending
@@ -173,6 +222,7 @@ const SigninForm = () => {
         }
       }
     };
+    
   
     
     
