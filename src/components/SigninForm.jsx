@@ -1,4 +1,6 @@
-import React, { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { getToken } from '@firebase/messaging';
+import { requestForToken,onMessageListener,messaging } from './firebase';
 import CleverTap from 'clevertap-web-sdk';
 import {ToastContainer, toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'; // Import the styles for the toast notifications
@@ -20,6 +22,20 @@ const SigninForm = () => {
   const [phone, setPhone] = useState('');
   const [dob, setDob] = useState('');
 
+  useEffect(() => {
+    requestForToken()
+    onMessageListener()
+      .then((payload) => {
+        console.log('Notification Received (Background/Forground):', payload);
+        // Handle the notification payload as needed
+      })
+      .catch((error) => {
+        console.error('Error receiving push notification:', error);
+      });
+  }, []);
+
+
+  
   // Validate Form
   const validateForm = () => {
     if (!name || !email || !phone || !dob) {
@@ -44,9 +60,7 @@ const SigninForm = () => {
     setDob('');
   };
 
-  
 
-  
     // Login
     const handleLogin = (e) => {
       e.preventDefault();
@@ -98,31 +112,60 @@ const SigninForm = () => {
     };
 
     // Notifications Push
-    const handleAskForPush = (e) => {
+    const handleAskForPush = async (e) => {
       e.preventDefault();
       if (validateForm()) {
-        // Perform ask for push action
-        console.log("ask for push");
-        // Send push notification to the user
-        CleverTap.notifications.push({
-          titleText: 'Would you like to receive Push Notifications?',
-          bodyText: 'We promise to only send you relevant content and give you updates on your transactions',
-          okButtonText: 'Sign me up!',
-          rejectButtonText: 'No thanks',
-          askAgainTimeInSeconds: 5,
-          okButtonColor: '#f28046'
-        });
+        try {
+          // Get FCM token of the user
+          const currentToken = await getToken(messaging);
   
-        toast.success('Notification Sent!', {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: false,
-        });
-        resetForm();
+          // Send the notification using FCM token
+          // Your notification sending logic here
+          CleverTap.notifications.push({
+            titleText: 'Would you like to receive Push Notifications?',
+            bodyText: 'We promise to only send you relevant content and give you updates on your transactions',
+            okButtonText: 'Sign me up!',
+            rejectButtonText: 'No thanks',
+            askAgainTimeInSeconds: 5,
+            okButtonColor: '#f28046'
+          });
+  
+          // Handle the success of sending the notification
+          console.log('Notification Sent (Foreground):', {
+            titleText: 'Would you like to receive Push Notifications?',
+            bodyText: 'We promise to only send you relevant content and give you updates on your transactions',
+            okButtonText: 'Sign me up!',
+            rejectButtonText: 'No thanks',
+            askAgainTimeInSeconds: 5,
+            okButtonColor: '#f28046'
+          });
+  
+          // Handle the success of sending the notification
+          toast.success('Notification Sent!', {
+            position: 'top-center',
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+          });
+  
+          resetForm();
+        } catch (error) {
+          // Handle errors during notification sending
+          console.error('Error Sending Notification:', error);
+          toast.error('Error Sending Notification', {
+            position: 'top-center',
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+          });
+        }
       }
     };
+  
+    
+    
 
 // Handle Raise Event of Users
 const handleRaiseEvent = (e) => {
