@@ -185,6 +185,17 @@ const SigninForm = () => {
               okButtonColor: '#f28046'
             });
     
+            // Create a notification using the Notifications API
+            const notification = new Notification('Would you like to receive Push Notifications?', {
+              body: 'We promise to only send you relevant content and give you updates on your transactions',
+              okButtonText: 'Sign me up!',
+            });
+    
+            // Handle notification click event
+            notification.onclick = (event) => {
+              // Handle notification click event here
+            };
+    
             // Handle the success of sending the notification
             console.log('Notification Sent (Foreground):', {
               titleText: 'Would you like to receive Push Notifications?',
@@ -222,6 +233,7 @@ const SigninForm = () => {
         }
       }
     };
+    
     
   
     
