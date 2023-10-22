@@ -22,6 +22,11 @@ const SigninForm = () => {
   const [phone, setPhone] = useState('');
   const [dob, setDob] = useState('');
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regular expression for validating email addresses
+  const phoneRegex = /^\+91\d{10}$/;
+
+
+
   useEffect(() => {
     requestForToken()
     onMessageListener()
@@ -48,8 +53,32 @@ const SigninForm = () => {
       });
       return false;
     }
+  
+    if (!emailRegex.test(email)) {
+      toast.error('Invalid email address!', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+      });
+      return false;
+    }
+  
+    if (!phoneRegex.test(phone)) {
+      toast.error('Invalid phone number! Please enter a valid Indian phone number with +91 country code.', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+      });
+      return false;
+    }
+  
     return true;
   };
+ 
   
   
   const formRef = useRef(null)
@@ -59,7 +88,6 @@ const SigninForm = () => {
     setPhone('');
     setDob('');
   };
-
 
     // Login
     const handleLogin = (e) => {
@@ -187,14 +215,9 @@ const SigninForm = () => {
     
             // Create a notification using the Notifications API
             const notification = new Notification('Would you like to receive Push Notifications?', {
-              body: 'We promise to only send you relevant content and give you updates on your transactions',
-              okButtonText: 'Sign me up!',
+              body: 'We promise to only send you relevant content and give you updates on your transactions,',
             });
-    
-            // Handle notification click event
-            notification.onclick = (event) => {
-              // Handle notification click event here
-            };
+
     
             // Handle the success of sending the notification
             console.log('Notification Sent (Foreground):', {
