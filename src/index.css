@@ -38,11 +38,10 @@ body{
   background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
 }
 
-.bg{
-  /* background-color: rgba(143, 211, 244, 1); */
-  /* border: 1px solid red; */
-  /* border-radius: 35px; */
-  /* padding: 35px; */
+.form-control:focus{
+  border-color: none !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 .custom-btn {
   width: auto;

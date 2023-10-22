@@ -3,7 +3,7 @@ import { getToken } from '@firebase/messaging';
 import { requestForToken,onMessageListener,messaging } from './firebase';
 import CleverTap from 'clevertap-web-sdk';
 import {ToastContainer, toast} from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css'; // Import the styles for the toast notifications
+import 'react-toastify/dist/ReactToastify.css'; 
 import {
   MDBBtn,
   MDBContainer,
@@ -17,7 +17,7 @@ import {
 from 'mdb-react-ui-kit';
 
 const SigninForm = () => {
-    const [name, setName] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [dob, setDob] = useState('');
@@ -80,7 +80,7 @@ const SigninForm = () => {
   };
  
   
-  
+  // To reset the form on submission
   const formRef = useRef(null)
   const resetForm = () => {
     setName('');
@@ -203,19 +203,13 @@ const SigninForm = () => {
             const currentToken = await getToken(messaging);
     
             // Send the notification using FCM token
-            // Your notification sending logic here
             CleverTap.notifications.push({
               titleText: 'Would you like to receive Push Notifications?',
               bodyText: 'We promise to only send you relevant content and give you updates on your transactions',
               okButtonText: 'Sign me up!',
               rejectButtonText: 'No thanks',
               askAgainTimeInSeconds: 5,
-              okButtonColor: '#f28046'
-            });
-    
-            // Create a notification using the Notifications API
-            const notification = new Notification('Would you like to receive Push Notifications?', {
-              body: 'We promise to only send you relevant content and give you updates on your transactions,',
+              okButtonColor: '#f28046',
             });
 
     
@@ -257,21 +251,19 @@ const SigninForm = () => {
       }
     };
     
-    
-  
-    
-    
 
 // Handle Raise Event of Users
 const handleRaiseEvent = (e) => {
   e.preventDefault();
   if (validateForm()) {
+    const timestamp = new Date().toISOString();
     // Perform raise event action
     CleverTap.event.push('Details of Person', {
       Name: name,
       Email: email,
       Phone: phone,
-      DOB: new Date(),
+      DOB: new Date().toISOString(),
+      Timestamp : timestamp
     });
 
     toast.success('Event Raised!', {
