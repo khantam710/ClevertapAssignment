@@ -3,6 +3,7 @@ if ("undefined" === typeof globalRedirectPath)
   var globalNotificationData, globalRedirectPath;
 self.addEventListener("install", function (b) {
   self.skipWaiting();
+  console.log("worker");
   console.log("CT Service worker installed");
 });
 self.addEventListener("activate", function (b) {
