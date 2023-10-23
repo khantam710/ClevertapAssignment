@@ -10,34 +10,10 @@
 body{
   font-family: 'Poppins', sans-serif;
   background-color: #8fc4b7;
-  /* background-image: url(https://images.unsplash.com/photo-1432821596592-e2c18b78144f?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bG9naW58ZW58MHx8MHx8fDA%3D); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
-
-.gradient-custom-3 {
-  /* fallback for old browsers */
-  background: #84fab0;
-
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
-
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
-}
-
-.gradient-custom-4 {
-  /* fallback for old browsers */
-  background: #84fab0;
-
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
-
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
-}
-
 .form-control:focus{
   border-color: none !important;
   box-shadow: none !important;
