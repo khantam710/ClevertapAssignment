@@ -23,6 +23,10 @@ body{
   width: auto;
   padding: 10px 20px;
   font-size: 16px;
+  color:white !important;
+}
+.custom-btn:hover{
+  color: black !important;
 }
 /* Animation for image */
 .animated-image {
