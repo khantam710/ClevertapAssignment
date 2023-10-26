@@ -19,7 +19,7 @@ function App() {
         }
   
         // Register the new service worker
-        navigator.serviceWorker.register('/sw_webpush.js', { scope: '/' })
+        navigator.serviceWorker.register('/firebase-messaging-sw.js', { scope: '/' })
           .then((registration) => {
             console.log('Service Worker registered with scope:', registration.scope);
           })

@@ -28,13 +28,13 @@ const SigninForm = () => {
 
   useEffect(() => {
     requestForToken();
-    // onMessageListener()
-    //   .then((payload) => {
-    //     console.log("Notification Received (Background/Forground):", payload);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error receiving push notification:", error);
-    //   });
+    onMessageListener()
+      .then((payload) => {
+        console.log("Notification Received (Background/Forground):", payload);
+      })
+      .catch((error) => {
+        console.error("Error receiving push notification:", error);
+      });
   }, []);
 
   // Validate Form
