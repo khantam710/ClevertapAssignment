@@ -5,7 +5,7 @@ import SigninForm from './components/SigninForm';
 
 
 function App() {
-  CleverTap.init({ accountId: 'Z44-Z4K-K65Z' });
+  CleverTap.init({ accountId: 'ZWW-WWW-WWRZ' });
   CleverTap.spa = true;
 
   if ('serviceWorker' in navigator) {

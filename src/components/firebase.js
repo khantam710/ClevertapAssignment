@@ -28,7 +28,6 @@ export const requestForToken = async () => {
   
       if (currentToken) {
         console.log('Current token for client:', currentToken);
-        // Perform any other necessary action with the token
       } else {
         // Show permission request UI
         console.log('No registration token available. Request permission to generate one.');

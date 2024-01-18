@@ -8,10 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import {
   MDBBtn,
   MDBContainer,
-  MDBCard,
-  MDBCardBody,
   MDBInput,
-  MDBCheckbox,
   MDBRow,
   MDBCol,
 } from "mdb-react-ui-kit";
@@ -205,13 +202,15 @@ const SigninForm = () => {
       const timestamp = new Date().toISOString();
 
       // Raise event for successful signup form submission
+      console.log("Before Clevetap Event");
       CleverTap.event.push("Signup Form Submitted", {
         Name: name,
         Email: email,
         Phone: phone,
         DOB: formattedDOB,
         Timestamp: timestamp,
-      });
+      },{override:true});
+      console.log("After Clevertap event");
 
       // Show success message to the user
       toast.success("Events Raised: Signup Form Submitted!", {
