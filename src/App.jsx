@@ -2,11 +2,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import CleverTap from 'clevertap-web-sdk';
 import SigninForm from './components/SigninForm';
+import Form from './components/form';
 
 
 function App() {
-  CleverTap.init({ accountId: 'ZWW-WWW-WWRZ' });
+  CleverTap.init({ accountId: 'ZWW-WWW-WWRZ', clearCookie: false, override: false,isOUL: false});
   CleverTap.spa = true;
+  console.log('CleverTap initialized');
 
   if ('serviceWorker' in navigator) {
     // Unregister the previous service worker (if any)
@@ -34,6 +36,7 @@ function App() {
   return (
     <>
       <SigninForm/>
+      {/* <Form/> */}
     </>
   )
 }

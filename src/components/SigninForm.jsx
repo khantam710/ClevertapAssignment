@@ -203,13 +203,13 @@ const SigninForm = () => {
 
       // Raise event for successful signup form submission
       console.log("Before Clevetap Event");
-      CleverTap.event.push("Signup Form Submitted", {
+      CleverTap.event.push("Website Visited", {
         Name: name,
         Email: email,
         Phone: phone,
         DOB: formattedDOB,
         Timestamp: timestamp,
-      },{override:true});
+      });
       console.log("After Clevertap event");
 
       // Show success message to the user
