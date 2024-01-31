@@ -48,6 +48,7 @@
    })();
    clevertap.notificationCallback = function(msg){
       clevertap.raiseNotificationViewed();
+      clevertap.raiseNotificationClicked();
       console.log(JSON.stringify(msg));
    };
     </script>
