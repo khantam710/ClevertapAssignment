@@ -49,6 +49,7 @@
    clevertap.notificationCallback = function(msg){
       clevertap.raiseNotificationViewed();
       clevertap.raiseNotificationClicked();
+      clevertap.getLocation(lat, lng);   
       console.log(JSON.stringify(msg));
    };
     </script>
