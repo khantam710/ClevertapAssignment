@@ -38,6 +38,16 @@
  clevertap.account.push({"id": "WRZ-757-6W7Z"});
  clevertap.privacy.push({optOut: false}); //set the flag to true, if the user of the device opts out of sharing their data
  clevertap.privacy.push({useIP: true}); //set the flag to true, if the user agrees to share their IP data
+
+  // Function to fetch user location
+  function fetchUserLocation() {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        clevertap.getLocation(lat,lng); // Call CleverTap function with latitude and longitude
+      });
+    }
+  
   (function () {
           var wzrk = document.createElement('script');
           wzrk.type = 'text/javascript';
@@ -49,7 +59,6 @@
    clevertap.notificationCallback = function(msg){
       clevertap.raiseNotificationViewed();
       clevertap.raiseNotificationClicked();
-      clevertap.getLocation(lat, lng);   
       console.log(JSON.stringify(msg));
    };
     </script>
