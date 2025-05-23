@@ -6,7 +6,7 @@ import SigninForm from './components/SigninForm';
 
 
 function App() {
-  CleverTap.init({ accountId: 'ZWW-WWW-WWRZ', clearCookie: false, override: false,isOUL: false});
+  CleverTap.init({ accountId: 'WRZ-757-6W7Z', clearCookie: false, override: false,isOUL: false});
   CleverTap.spa = true;
   console.log('CleverTap initialized');
 
