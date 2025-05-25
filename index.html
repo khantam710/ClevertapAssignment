@@ -33,18 +33,18 @@
         : "http://static.clevertap.com") + "/js/clevertap.min.js";
     wzrk.onload = function () {
       // Wait for SDK to load, then fetch ID
-      clevertap.onUserLogin.push({
-        Site: {
-          Identity: "user_001", // Provide a unique user ID
-          Email: "test@example.com",
-          Name: "Test User",
-        },
-      });
+      // clevertap.onUserLogin.push({
+      //   Site: {
+      //     Identity: "user_001", // Provide a unique user ID
+      //     Email: "test@example.com",
+      //     Name: "Test User",
+      //   },
+      // });
 
-      // Call this after setting identity
-      clevertap.getCleverTapID(function (ctid) {
-        console.log("CleverTap ID:", ctid);
-      });
+      // // Call this after setting identity
+      // clevertap.getCleverTapID(function (ctid) {
+      //   console.log("CleverTap ID:", ctid);
+      // });
 
       // Optional: Get user location
       if (navigator.geolocation) {
