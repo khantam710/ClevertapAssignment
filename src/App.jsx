@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import CleverTap from 'clevertap-web-sdk';
 import SigninForm from './components/SigninForm';
+import React from 'react';
 // import Form from './components/form';
 
 
