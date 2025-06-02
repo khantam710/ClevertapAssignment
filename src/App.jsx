@@ -6,9 +6,19 @@ import SigninForm from './components/SigninForm';
 
 
 function App() {
-  CleverTap.init({ accountId: 'WRZ-757-6W7Z', clearCookie: false, override: false,isOUL: false});
-  CleverTap.spa = true;
-  console.log('CleverTap initialized');
+  function App() {
+  React.useEffect(() => {
+    CleverTap.init({ 
+      accountId: 'WRZ-757-6W7Z', 
+      clearCookie: false, 
+      override: false, 
+      isOUL: false,
+      spa: true
+    });
+
+    const clevertapId = CleverTap.getCleverTapID();
+    console.log('CleverTap ID:', clevertapId);
+  }, []);
 
   if ('serviceWorker' in navigator) {
     // Unregister the previous service worker (if any)
