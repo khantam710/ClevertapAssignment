@@ -6,7 +6,6 @@ import SigninForm from './components/SigninForm';
 
 
 function App() {
-  function App() {
   React.useEffect(() => {
     CleverTap.init({ 
       accountId: 'WRZ-757-6W7Z', 
