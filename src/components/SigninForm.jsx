@@ -21,7 +21,7 @@ const SigninForm = () => {
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regular expression for validating email addresses
   const phoneRegex = /^\+91\d{10}$/; // Regular expression for validating phone number
-  const formattedDOB = formatCleverTapDOB(dob);
+  // const formattedDOB = formatCleverTapDOB(dob);
 
   useEffect(() => {
     requestForToken();
@@ -88,6 +88,7 @@ const SigninForm = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     if (validateForm()) {
+    const formattedDOB = formatCleverTapDOB(dob);
       // Perform login action
       CleverTap.onUserLogin.push({
         Site: {
